@@ -1,7 +1,10 @@
 package io.sureshg
 
 import org.robovm.apple.coregraphics.CGRect
+import org.robovm.apple.dispatch.DispatchQueue.getMainQueue
 import org.robovm.apple.uikit.*
+import java.util.*
+import java.util.concurrent.TimeUnit.MILLISECONDS
 
 /**
  * Root view controller.
@@ -15,8 +18,6 @@ class MyViewController : UIViewController() {
     private var clickCount: Int = 0
 
     init {
-        // Get the view of this view controller.
-        val view = view
 
         // Setup background.
         view.backgroundColor = UIColor.white()
@@ -33,9 +34,27 @@ class MyViewController : UIViewController() {
             setTitle("Click me!", UIControlState.Normal)
             titleLabel.font = UIFont.getBoldSystemFont(22.0)
         }
-        button.addOnTouchUpInsideListener { control, event -> label.text = "Hello Kotlin - " + ++clickCount }
+
+        button.addOnTouchUpInsideListener { control, event ->
+            label.text = "Hello Kotlin - ${++clickCount}"
+            displayToast(Calendar.getInstance().time.toString())
+        }
 
         view.addSubview(label)
         view.addSubview(button)
+    }
+
+    /**
+     * Show toast message.
+     *
+     * @param message message to be displayed.
+     */
+    fun displayToast(message: String) {
+        val alert = UIAlertController("Clicked!", message, UIAlertControllerStyle.ActionSheet)
+        presentViewController(alert, true) {
+            getMainQueue().after(200, MILLISECONDS) {
+                alert.dismissViewController(true) {}
+            }
+        }
     }
 }

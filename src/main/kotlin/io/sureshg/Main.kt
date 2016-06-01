@@ -11,7 +11,6 @@ import org.robovm.apple.uikit.*
 class Main : UIApplicationDelegateAdapter() {
 
     lateinit var win: UIWindow;
-
     lateinit var rootViewController: MyViewController
 
     override fun didFinishLaunching(application: UIApplication?, launchOptions: UIApplicationLaunchOptions?): Boolean {
