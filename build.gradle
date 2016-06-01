@@ -1,0 +1,46 @@
+/**
+ * Robovm app build script.
+ */
+buildscript {
+    ext {
+        kotlin_version = '1.0.2'
+        gradle_version = '2.13'
+        robovm_version = '2.2.0-SNAPSHOT'
+    }
+    repositories {
+        mavenCentral()
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.mobidevelop.robovm:robovm-gradle-plugin:$robovm_version"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'kotlin'
+apply plugin: 'idea'
+apply plugin: 'robovm'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    maven { url "https://maven-central.storage.googleapis.com" }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    jcenter()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "com.mobidevelop.robovm:robovm-rt:$robovm_version"
+    compile "com.mobidevelop.robovm:robovm-cocoatouch:$robovm_version"
+    testCompile "junit:junit:4.12"
+}
+
+robovm {
+}
+
+wrapper {
+    gradleVersion = gradle_version
+}
