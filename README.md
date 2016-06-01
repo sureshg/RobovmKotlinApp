@@ -13,5 +13,5 @@ $ ./gradlew clean build launchIPhoneSimulator
 ```
 
 
-<img src='resources/robovm.gif' title='Kotlin iOS App' width='' alt='Kotlin iOS App' />
+<img src='graphics/robovm.gif' title='Kotlin iOS App' width='' alt='Kotlin iOS App' />
 
